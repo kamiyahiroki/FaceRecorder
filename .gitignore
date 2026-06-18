@@ -19,3 +19,7 @@ Thumbs.db
 *.keystore
 *.jks
 keystore.properties
+
+# Build artifacts
+*.apk
+*.aab
