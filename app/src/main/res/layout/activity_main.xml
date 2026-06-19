@@ -30,15 +30,6 @@
             android:textStyle="bold"
             android:layout_marginBottom="8dp" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="正面・右・左・上・下の順に顔を向けてください"
-            android:textColor="#BBBBBB"
-            android:textSize="13sp"
-            android:gravity="center"
-            android:layout_marginBottom="40dp" />
-
         <EditText
             android:id="@+id/etName"
             android:layout_width="match_parent"
@@ -49,6 +40,8 @@
             android:background="#FFFFFF"
             android:padding="14dp"
             android:textSize="16sp"
+            android:textColor="#000000"
+            android:textColorHint="#AAAAAA"
             android:layout_marginBottom="20dp" />
 
         <Button
@@ -111,17 +104,36 @@
             android:shadowRadius="6"
             android:text="3" />
 
-        <!-- Bottom: recording progress bar -->
-        <ProgressBar
-            android:id="@+id/progressBar"
-            style="?android:attr/progressBarStyleHorizontal"
+        <!-- Bottom: angle status text + progress bar -->
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="10dp"
-            android:layout_gravity="bottom"
-            android:max="100"
-            android:progress="0"
-            android:progressTint="#FF4444"
-            android:progressBackgroundTint="#555555" />
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="bottom">
+
+            <TextView
+                android:id="@+id/tvAngleStatus"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:textColor="#FFFFFF"
+                android:textSize="18sp"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:background="#CC000000"
+                android:text="" />
+
+            <ProgressBar
+                android:id="@+id/progressBar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="10dp"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="#FF4444"
+                android:progressBackgroundTint="#555555" />
+
+        </LinearLayout>
 
     </FrameLayout>
 
