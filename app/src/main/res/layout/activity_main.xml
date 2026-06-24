@@ -1,15 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#000000">
 
-    <!-- Camera preview: always visible behind panels -->
-    <androidx.camera.view.PreviewView
-        android:id="@+id/previewView"
+    <!-- Camera band: resized in code to a centered 4:3 landscape strip so that the
+         preview shows exactly the 640×480 region that gets recorded (the rest of the
+         portrait screen stays black). Both the preview and the guide live inside it. -->
+    <FrameLayout
+        android:id="@+id/cameraBand"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_gravity="center">
+
+        <!-- Camera preview: always visible behind panels -->
+        <androidx.camera.view.PreviewView
+            android:id="@+id/previewView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:scaleType="fillCenter" />
+
+        <!-- Face position guide: darkens outside the head oval during recording.
+             Mirrors _draw_face_guide() in recorder.py. Always drawn; panelInput's
+             opaque background hides it during the name-entry screen. -->
+        <com.example.facerecorder.FaceGuideView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="false"
+            android:focusable="false" />
+
+    </FrameLayout>
 
     <!-- Input panel: shown at startup -->
     <LinearLayout
