@@ -487,10 +487,11 @@ public class MainActivity extends AppCompatActivity {
         FaceLandmark rightMouth = face.getLandmark(FaceLandmark.MOUTH_RIGHT);
         // NOSE_BRIDGE contour: starts between eyes, ends at nose tip (last point)
         FaceContour noseBridge = face.getContour(FaceContour.NOSE_BRIDGE);
+        List<PointF> bridgePoints = noseBridge != null ? noseBridge.getPoints() : null;
 
         if (leftEye == null || rightEye == null || leftMouth == null
-                || rightMouth == null || noseBridge == null
-                || noseBridge.getPoints().isEmpty()) {
+                || rightMouth == null || bridgePoints == null
+                || bridgePoints.isEmpty()) {
             runOnUiThread(() -> {
                 tvAngleStatus.setText("ランドマーク検出中...");
                 tvAngleStatus.setTextColor(0xFFAAAAAA);
@@ -504,7 +505,6 @@ public class MainActivity extends AppCompatActivity {
         // cover the full range of head angles, not just the five target poses.
         encodeCurrentFrame(imageProxy);
 
-        List<PointF> bridgePoints = noseBridge.getPoints();
         PointF noseTip = bridgePoints.get(bridgePoints.size() - 1);
 
         // Normalized yaw/pitch — identical formula to FaceProcessor in register.py
